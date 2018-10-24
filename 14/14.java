@@ -3,10 +3,10 @@ import java.math.*;
 
 class Euler{ 
     long startingNumber = 1; 
-    long finishingNumber = 1; 
     long currentNumber = 0; 
     long chain = 1; 
     long maxChain = 0; 
+    long numberOfMaxchain=0;
 
     public static void main(String args[]){
         Euler euler = new Euler(); 
@@ -14,30 +14,19 @@ class Euler{
     } 
 
     public void start(){ 
-
-        final long startTime = System.nanoTime();
-
-        while(startingNumber < 1000000){
-            currentNumber = startingNumber; 
-            while(currentNumber != finishingNumber){ 
-                if((currentNumber%2) == 0){ 
-                    currentNumber = even(currentNumber); 
-                } else{ 
-                    currentNumber = odd(currentNumber); 
-                } 
-                chain++; 
-            } 
-            if(chain > maxChain){ 
-                maxChain = chain;
-                System.out.println(startingNumber); 
-                //System.out.println(maxChain); 
-            } 
-            startingNumber++;
-        } 
-        System.out.println("Chain Number: " +maxChain); 
-
-        final long duration = System.nanoTime() - startTime;
-        System.out.println("This Program finished in: " + duration/1000000000 + " seconds!");
+		
+		for(currentNumber=0; currentNumber<1000000; currentNumber++){
+			long currentChain=calculateChainNumber(currentNumber);
+			if(currentChain > maxChain){
+				maxChain=currentChain;
+				numberOfMaxchain=currentNumber;
+			}
+			System.out.println("currently: " + currentNumber);
+		}
+		//long target=13;
+		//long chainNumber = calculateChainNumber(target);
+				
+		System.out.println("number: " + numberOfMaxchain);
     } 
 
     public long even(long number){ 
@@ -47,4 +36,16 @@ class Euler{
     public long odd(long number){ 
         return number * 3 + 1; 
     } 
+
+	public long calculateChainNumber(long number){
+		while(number != 1){
+			if((number%2)==0){
+				number=even(number);
+			} else{
+				number=odd(number);
+			}
+			chain++;
+		}
+		return chain;
+	}
 } 
