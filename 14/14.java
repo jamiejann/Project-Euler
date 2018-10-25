@@ -15,13 +15,13 @@ class Euler{
 
     public void start(){ 
 		
-		for(currentNumber=0; currentNumber<1000000; currentNumber++){
+		for(currentNumber=1; currentNumber<1000000; currentNumber++){
 			long currentChain=calculateChainNumber(currentNumber);
 			if(currentChain > maxChain){
 				maxChain=currentChain;
 				numberOfMaxchain=currentNumber;
+				System.out.println("currently: " + currentNumber);
 			}
-			System.out.println("currently: " + currentNumber);
 		}
 		//long target=13;
 		//long chainNumber = calculateChainNumber(target);
@@ -38,6 +38,7 @@ class Euler{
     } 
 
 	public long calculateChainNumber(long number){
+		chain=1;
 		while(number != 1){
 			if((number%2)==0){
 				number=even(number);
